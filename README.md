@@ -1,3 +1,2 @@
 # NodeJs
-NodeJs ile yapmış olduğum çalışmala
-dsadfgsfdgfgsfdfdsaf deneme
+NodeJs ile yapmış olduğum çalışmalar
