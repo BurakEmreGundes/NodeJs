@@ -2,7 +2,13 @@ const fs=require('fs');
 const chalk=require('chalk');
 
 const dosyadanKisileriOku=function(fileName){
-    return JSON.parse(fs.readFileSync(fileName));
+    try{
+        return JSON.parse(fs.readFileSync(fileName));
+    }catch(e){
+    console.log(e);
+    return [];
+    }
+   
 }
 const dosyayaKisileriYaz=function(kisiler,mesaj){
     fs.writeFile("kisiler.json",JSON.stringify(kisiler),(err)=>{
