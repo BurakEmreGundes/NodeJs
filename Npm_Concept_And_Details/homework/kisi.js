@@ -62,7 +62,7 @@ const kisiGuncelle=function(id,isim,tel){
         });
         dosyayaKisileriYaz(kisiler,"güncellendi!");
     }else{
-        console.log(chalk.green.bold("Bu kişi dosyada bulunmamaktadır!"));
+        console.log(chalk.green.bold("Bu kişi dosyada bulunmamaktadır"));
     }
 
 }
