@@ -46,7 +46,7 @@ yargs.command({
 //kişi sil komutu 
 yargs.command({
     command: 'sil',
-    describe: 'kişi silmeye yarar',
+    describe: 'kişi silmeye yarar.',
     builder:{
         id:{
             describe:'kullanici id\'si',
