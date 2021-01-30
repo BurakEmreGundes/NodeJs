@@ -5,7 +5,7 @@ const dosyadanKisileriOku=function(fileName){
     try{
         return JSON.parse(fs.readFileSync(fileName));
     }catch(e){
-    console.log(e);
+    console.log("hata"+e);
     return [];
     }
    
