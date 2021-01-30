@@ -26,6 +26,10 @@ const kisiEkle=function(isim,tel){
         isim,
         tel
     });
+    let idValidation=kisiler.filter(element=>{
+        return element.id==id;
+    });
+    idValidation.length>0 ? console.log((chalk.green.bold("Lütfen tekrar deneyiniz.Bu id degeri sisteme kayitli!"))) :dosyayaKisileriYaz(kisiler,"eklendi!");
     dosyayaKisileriYaz(kisiler,"eklendi!");
 
 }
@@ -35,19 +39,32 @@ const kisiSil=function(id){
     let yeniKisiler=kisiler.filter((element)=>{
         return element.id!=id;
     });
-    dosyayaKisileriYaz(yeniKisiler,"silindi!");
+    if(yeniKisiler.length<kisiler.length){
+        dosyayaKisileriYaz(yeniKisiler,"silindi!");
+    }else{
+        console.log(chalk.green.bold("Bu kişi dosyada bulunmamaktadır!"));
+    }
+   
     
 }
 
 const kisiGuncelle=function(id,isim,tel){
+    let idValidation=kisiler.filter(element=>{
+        return element.id==id;
+    })
     let kisiler=dosyadanKisileriOku("kisiler.json");
-    kisiler.forEach(element => {
-        if(element.id==id){
-            element.isim=isim;
-            element.tel=tel;
-        }        
-    });
-    dosyayaKisileriYaz(kisiler,"güncellendi!");
+    if(idValidation.length>0){
+        kisiler.forEach(element => {
+            if(element.id==id){
+                element.isim=isim;
+                element.tel=tel;
+            }        
+        });
+        dosyayaKisileriYaz(kisiler,"güncellendi!");
+    }else{
+        console.log(chalk.green.bold("Bu kişi dosyada bulunmamaktadır!"));
+    }
+
 }
 
 module.exports={
