@@ -1,10 +1,7 @@
 const yargs=require('yargs');
 const getWeatherByCountry=require('./capital-weather');
 
-
 calistir();
-
-
 
 function calistir(){
     yargs.command({
@@ -19,7 +16,6 @@ function calistir(){
             }
         }, 
         handler(argv){
-            console.log("sea");
             getWeatherByCountry.getWeatherByCountry(argv.ulke);
         }
     

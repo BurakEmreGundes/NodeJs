@@ -23,12 +23,15 @@ const myWeatherAxiosObject = axios.create({
 function getWeatherByCountry(country){
     
 myAxiosObject.get(`rest/v2/name/${country}`).then((res) => {
-    console.log(res.data);
+   /* console.log(res.data);
     const ulke = res.data[0];
     const baskent = ulke.capital;
     const nufus = ulke.population;
     const enlem = ulke.latlng[0];
-    const boylam = ulke.latlng[1];
+    const boylam = ulke.latlng[1];*/
+
+    const [{population:nufus,capital:baskent,latlng:[enlem,boylam]}]=res.data
+
     console.log(`Nufusu : ${nufus} Enlem : ${enlem} Boylam : ${boylam} ve Başkent : ${baskent}`);
 
     myWeatherAxiosObject.get("/weather",{
@@ -36,10 +39,11 @@ myAxiosObject.get(`rest/v2/name/${country}`).then((res) => {
             q: baskent
         }
     }).then((res) => {
-        console.log(res.data);
-        console.log(`Başkent ${res.data.name} bugün hava ${res.data.weather[0].description}`);
+        const {name,weather:[{description}],main:{temp:sicaklik}}=res.data;
+        //console.log(res.data);
+        console.log(`Başkent ${name} bugün hava ${description} sıcaklık ${sicaklik}`);
     }).catch((err) => {
-
+ 
         console.log(err);
     });
 
