@@ -7,6 +7,7 @@ const kullanıcılar=[
     {id:2,ad:'burak',yas:19},
 ]
 
+app.use(express.json());
 
 app.get('/',(req,res)=>{
     console.log("ana sayfaya girildi.");
@@ -37,6 +38,18 @@ app.get('/users/:id',(req,res)=>{
         });
     }
    
+});
+
+app.post('/users',(req,res)=>{
+
+    const yeniKullanici={
+        id:req.body.id,
+        ad:req.body.ad,
+        yas:req.body.yas
+    }
+    kullanıcılar.push(yeniKullanici);
+    res.send(yeniKullanici);
+
 });
 
 /*app.get('/users/:yas',(req,res)=>{
