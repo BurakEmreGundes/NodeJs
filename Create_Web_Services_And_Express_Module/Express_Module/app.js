@@ -1,7 +1,7 @@
 const { response } = require("express");
 const express=require("express");
 const app=express();
-
+const Joi = require('@hapi/joi');
 const kullanıcılar=[
     {id:1,ad:'emre',yas:32},
     {id:2,ad:'burak',yas:19},
@@ -41,7 +41,15 @@ app.get('/users/:id',(req,res)=>{
 });
 
 app.post('/users',(req,res)=>{
-
+    
+    
+    const schema=Joi.object({
+        id:Joi.number().integer().required(),
+        ad:Joi.string().min(3).max(30).required(),
+        yas:Joi.number().integer().min(10).max(90).required()
+    });
+  const sonuc=schema.validate(req.body);
+if(!sonuc.error){
     const yeniKullanici={
         id:req.body.id,
         ad:req.body.ad,
@@ -49,6 +57,10 @@ app.post('/users',(req,res)=>{
     }
     kullanıcılar.push(yeniKullanici);
     res.send(yeniKullanici);
+}else{
+    res.status(400).send(sonuc.error);
+}
+    
 
 });
 
