@@ -1,6 +1,13 @@
 const { response } = require('express');
 const express = require('express');
 const app=express();
+const morgan=require('morgan');
+
+
+app.use(express.json());
+app.use(express.static('public'));
+app.use(morgan("tiny"));
+//app.use(morgan("common"));
 
 
 
