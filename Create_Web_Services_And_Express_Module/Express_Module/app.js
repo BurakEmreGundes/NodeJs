@@ -1,4 +1,3 @@
-const { response } = require("express");
 const express=require("express");
 const app=express();
 const Joi = require('@hapi/joi');
@@ -72,7 +71,43 @@ if(!sonuc.error){
     console.log(kullanici)
     //res.send(kullanici);
 });*/
+app.put('/users/:id',(req,res)=>{
+   const bulunankullanici=kullanıcılar.find(user=>{
+       return parseInt(req.params.id)===user.id;
+   });
+   if(!bulunankullanici){
+       res.status(404).send(`${req.params.id}'li kullanıcı bulunamadı !`);
+    }
+    else{
+        const schema=Joi.object({
+            ad:Joi.string().min(3).max(30).required(),
+            yas:Joi.number().integer().min(10).max(90).required()
+        });
+      const sonuc=schema.validate(req.body);
+      if(!sonuc.error){
+       bulunankullanici.ad=req.body.ad;
+       bulunankullanici.yas=parseInt(req.body.yas);
+    
+        res.send(bulunankullanici);
+    }else{
+        res.status(400).send(sonuc.error);
+    }
+    }
+    });
 
+app.delete("/users/:id",(req,res)=>{
+    const silinecekkullanici=kullanıcılar.find((user)=>{
+        return user.id===parseInt(req.params.id);
+    });
+    if(silinecekkullanici){
+      const index=kullanıcılar.indexOf(silinecekkullanici);
+      kullanıcılar.splice(index,1);
+      res.send(silinecekkullanici);
+    }else{
+        res.status(404).send(`${req.params.id}'li kullanıcı bulunamadı !`);
+    }
+
+})
 
 app.listen(3000,()=>{
     console.log("Server 3000 portunu dinliyor...");
