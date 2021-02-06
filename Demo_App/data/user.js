@@ -3,14 +3,19 @@ const axios = require('axios');
 
 
 const axiosObject = axios.create({
-    baseURL: "https://jsonplaceholder.typicode.com"
+    baseURL: "https://jsonplaceholder.typicode.com/users"
 })
 
-async function getUser(param) {
-    const response = await axiosObject.get(`${param}`);
+async function getUsers() {
+    const response = await axiosObject.get();
     return response.data;
 }
 
 
+async function getOneUser(userId){
+    const response=await axiosObject.get(`${userId}`);
+    return response.data;
+}
 
-module.exports = getUser;
+
+module.exports ={ getUsers,getOneUser};

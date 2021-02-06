@@ -1,7 +1,5 @@
-const axios=require("axios");
+const authKey="5sd156fg6d112%&s4as:%&+357a";
 const data={
-    axiosNesnesi:axios.create({
-        baseURL:"https://jsonplaceholder.typicode.com"
-    })
+    authKey:"5sd156fg6d112%&s4as:%&+357a"
 }
 module.exports=data;
