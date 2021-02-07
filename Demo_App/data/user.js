@@ -7,14 +7,29 @@ const axiosObject = axios.create({
 })
 
 async function getUsers() {
-    const response = await axiosObject.get();
-    return response.data;
+    try {
+        const response = await axiosObject.get();
+        return response.data;
+    } catch (error) {
+        return{
+            errorMassage:"404 Not Found"
+        }
+    }
+ 
 }
 
 
 async function getOneUser(userId){
-    const response=await axiosObject.get(`${userId}`);
-    return response.data;
+
+    try {
+        const response=await axiosObject.get(`${userId}`);
+        return response.data;
+    } catch (error) {
+        return{
+            errorMassage:"404 Not Found"
+        }
+    }
+   
 }
 
 

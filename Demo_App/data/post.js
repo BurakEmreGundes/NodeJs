@@ -8,8 +8,15 @@ const myAxiosObject=axios.create({
 
 
 async function getPosts(){
-    const response=await myAxiosObject.get();
-    return response.data;
+    try {
+        const response=await myAxiosObject.get();
+        return response.data;
+    } catch (error) {
+        return{
+            errorMassage:"404 Not Found"
+        }
+    }
+   
 }
 
 
